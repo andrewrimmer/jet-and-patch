@@ -457,6 +457,16 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Individual photo cards animate in separately */
+        .photo-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .photo-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
         @media (max-width: 600px) {
             .hero h1 { font-size: 3.5rem; }
             .demand-list li { font-size: 1rem; padding: 1rem; }
@@ -543,7 +553,7 @@
     </div>
 
     <!-- PHOTO EVIDENCE -->
-    <div class="photo-section fade-in">
+    <div class="photo-section">
         <div class="section-title">PHOTOGRAPHIC EVIDENCE</div>
         <div class="photo-grid">
 
@@ -906,6 +916,7 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        document.querySelectorAll('.photo-card').forEach(el => observer.observe(el));
 
         // Countdown timer — Saturday 22 February 2026 at 6pm
         const returnDate = new Date('2026-02-22T18:00:00');
