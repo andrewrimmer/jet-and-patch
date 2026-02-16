@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JET & PATCH — Official House Takeover HQ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Gabarito:wght@400;700;900&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #FF6B2B;
+            --dark-orange: #E85A1B;
+            --yellow: #FFD23F;
+            --cream: #FFF8E7;
+            --brown: #4A2C0A;
+            --dark: #1a1a1a;
+            --green: #4CAF50;
+            --red: #E53935;
+            --pink: #FF8A80;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Gabarito', sans-serif;
+            background: var(--cream);
+            color: var(--brown);
+            overflow-x: hidden;
+        }
+        /* BREAKING NEWS TICKER */
+        .ticker-wrap {
+            background: var(--red);
+            color: white;
+            padding: 10px 0;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+        }
+        .ticker span {
+            padding: 0 3rem;
+        }
+        .ticker .dot {
+            color: var(--yellow);
+            padding: 0 0.5rem;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        /* HERO */
+        .hero {
+            margin-top: 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255,107,43,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255,210,63,0.15) 0%, transparent 50%),
+                var(--cream);
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234A2C0A' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .alert-badge {
+            background: var(--red);
+            color: white;
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .hero h1 {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(4rem, 12vw, 10rem);
+            line-height: 0.9;
+            color: var(--orange);
+            text-shadow: 4px 4px 0 var(--brown), -2px -2px 0 var(--yellow);
+            position: relative;
+            letter-spacing: 3px;
+        }
+        .hero h1 .amp {
+            color: var(--yellow);
+            text-shadow: 3px 3px 0 var(--brown);
+            font-size: 0.7em;
+        }
+        .hero .subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.3rem, 3vw, 2.2rem);
+            color: var(--brown);
+            margin-top: 1rem;
+            transform: rotate(-2deg);
+            position: relative;
+        }
+        .hero .status {
+            margin-top: 2rem;
+            background: var(--brown);
+            color: var(--yellow);
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            position: relative;
+        }
+        .status .blink {
+            width: 12px;
+            height: 12px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: blink 1s ease-in-out infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        /* SECTIONS */
+        section {
+            padding: 4rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--orange);
+            text-align: center;
+            margin-bottom: 2.5rem;
+            letter-spacing: 2px;
+        }
+        /* DEMANDS SECTION */
+        .demands {
+            background: var(--brown);
+            color: var(--cream);
+            padding: 4rem 1.5rem;
+            max-width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .demands::before {
+            content: '\26A0\FE0F';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.05;
+            top: -2rem;
+            right: -2rem;
+        }
+        .demands .section-title {
+            color: var(--yellow);
+        }
+        .demand-list {
+            max-width: 700px;
+            margin: 0 auto;
+            list-style: none;
+        }
+        .demand-list li {
+            background: rgba(255,255,255,0.08);
+            border-left: 5px solid var(--orange);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0 10px 10px 0;
+            font-size: 1.15rem;
+            line-height: 1.5;
+            transition: transform 0.2s;
+        }
+        .demand-list li:hover {
+            transform: translateX(8px);
+        }
+        .demand-list li .demand-number {
+            font-family: 'Bangers', cursive;
+            color: var(--yellow);
+            font-size: 1.4rem;
+            margin-right: 0.5rem;
+        }
+        /* PHOTO GRID */
+        .photo-section {
+            padding: 4rem 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .photo-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(74,44,10,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .photo-card:hover {
+            transform: translateY(-6px) rotate(-1deg);
+            box-shadow: 0 12px 40px rgba(74,44,10,0.2);
+        }
+        .photo-card:nth-child(even):hover {
+            transform: translateY(-6px) rotate(1deg);
+        }
+        .photo-card img {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+        }
+        .photo-card .stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--red);
+            color: white;
+            font-family: 'Bangers', cursive;
+            padding: 0.2rem 0.7rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transform: rotate(3deg);
+            letter-spacing: 1px;
+        }
+        .photo-card .img-wrap {
+            position: relative;
+            overflow: hidden;
+        }
+        .photo-card .caption {
+            padding: 1rem 1.2rem;
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+        .photo-card .caption .time {
+            font-size: 0.8rem;
+            color: rgba(74,44,10,0.5);
+            font-weight: 400;
+            margin-top: 0.3rem;
+        }
+        /* DAILY LOG */
+        .log-section {
+            background: white;
+            max-width: 700px;
+            margin: 3rem auto;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 4px 30px rgba(74,44,10,0.08);
+            position: relative;
+        }
+        .log-section::before {
+            content: '\1F4CB';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+        }
+        .log-entry {
+            border-bottom: 2px dashed rgba(74,44,10,0.1);
+            padding: 1.2rem 0;
+        }
+        .log-entry:last-child {
+            border-bottom: none;
+        }
+        .log-entry .log-time {
+            font-family: 'Bangers', cursive;
+            color: var(--orange);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+        .log-entry .log-author {
+            font-size: 0.8rem;
+            color: rgba(74,44,10,0.5);
+            margin-bottom: 0.3rem;
+        }
+        .log-entry .log-text {
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        /* THREAT LEVEL */
+        .threat-section {
+            text-align: center;
+            padding: 3rem 1.5rem;
+        }
+        .threat-meter {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 30px rgba(74,44,10,0.08);
+        }
+        .threat-meter .meter-label {
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            color: var(--brown);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        .meter-bar {
+            height: 30px;
+            background: #eee;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--green), var(--yellow), var(--orange), var(--red));
+            border-radius: 15px;
+            animation: fillMeter 2s ease-out 1s forwards;
+        }
+        @keyframes fillMeter {
+            0% { width: 0%; }
+            100% { width: 87%; }
+        }
+        .meter-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: rgba(74,44,10,0.5);
+        }
+        .threat-status {
+            margin-top: 1.5rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: var(--red);
+        }
+        /* MESSAGE TO HUMAN */
+        .message-section {
+            background: var(--orange);
+            color: white;
+            padding: 4rem 1.5rem;
+            text-align: center;
+            max-width: 100%;
+        }
+        .message-section .section-title {
+            color: white;
+        }
+        .message-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+            border: 2px dashed rgba(255,255,255,0.3);
+        }
+        .message-box p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .message-box .signature {
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            margin-top: 1.5rem;
+        }
+        .paw-prints {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            letter-spacing: 8px;
+        }
+        /* COUNTDOWN */
+        .countdown-section {
+            text-align: center;
+            padding: 3rem 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .countdown-box {
+            display: inline-flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .countdown-unit {
+            background: var(--brown);
+            color: var(--yellow);
+            padding: 1.5rem;
+            border-radius: 16px;
+            min-width: 100px;
+        }
+        .countdown-unit .number {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .countdown-unit .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.3rem;
+            opacity: 0.7;
+        }
+        .countdown-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: var(--brown);
+            margin-top: 1.5rem;
+        }
+        /* FOOTER */
+        footer {
+            background: var(--brown);
+            color: rgba(255,255,255,0.4);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+        }
+        footer .footer-emojis {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 5px;
+        }
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 3.5rem; }
+            .demand-list li { font-size: 1rem; padding: 1rem; }
+            .photo-grid { grid-template-columns: 1fr; }
+            .log-section { padding: 2rem 1.2rem; margin: 2rem 1rem; }
+            .message-box { padding: 1.5rem; }
+            .countdown-unit { min-width: 75px; padding: 1rem; }
+            .countdown-unit .number { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- BREAKING NEWS TICKER -->
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span>BREAKING: Guinea pigs seize control of household</span>
+            <span class="dot">&bull;</span>
+            <span>Fridge raided &mdash; all lettuce now belongs to Jet &amp; Patch</span>
+            <span class="dot">&bull;</span>
+            <span>Sofa officially claimed as sovereign guinea pig territory</span>
+            <span class="dot">&bull;</span>
+            <span>Remote control commandeered &mdash; it's only nature documentaries now</span>
+            <span class="dot">&bull;</span>
+            <span>Dad forced to pay rent in cucumber slices</span>
+            <span class="dot">&bull;</span>
+            <span>Sources confirm: human child last seen heading to "the mountains" &mdash; suspicious</span>
+            <span class="dot">&bull;</span>
+            <span>BREAKING: Guinea pigs seize control of household</span>
+            <span class="dot">&bull;</span>
+            <span>Fridge raided &mdash; all lettuce now belongs to Jet &amp; Patch</span>
+            <span class="dot">&bull;</span>
+            <span>Sofa officially claimed as sovereign guinea pig territory</span>
+            <span class="dot">&bull;</span>
+            <span>Remote control commandeered &mdash; it's only nature documentaries now</span>
+            <span class="dot">&bull;</span>
+            <span>Dad forced to pay rent in cucumber slices</span>
+            <span class="dot">&bull;</span>
+            <span>Sources confirm: human child last seen heading to "the mountains" &mdash; suspicious</span>
+            <span class="dot">&bull;</span>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="alert-badge">SITUATION CRITICAL</div>
+        <h1>JET <span class="amp">&amp;</span> PATCH</h1>
+        <p class="subtitle">have officially taken over the house</p>
+        <div class="status">
+            <span class="blink"></span>
+            TAKEOVER STATUS: ACTIVE
+        </div>
+    </section>
+
+    <!-- THREAT LEVEL -->
+    <section class="threat-section fade-in">
+        <div class="section-title">CURRENT THREAT LEVEL</div>
+        <div class="threat-meter">
+            <div class="meter-label">HOUSEHOLD CHAOS METER</div>
+            <div class="meter-bar">
+                <div class="meter-fill"></div>
+            </div>
+            <div class="meter-labels">
+                <span>Calm</span>
+                <span>Mild wheeks</span>
+                <span>Zoomies</span>
+                <span>TOTAL CHAOS</span>
+            </div>
+            <div class="threat-status">Status: Uncontrollable Popcorning</div>
+        </div>
+    </section>
+
+    <!-- DEMANDS -->
+    <div class="demands fade-in">
+        <div class="section-title" style="max-width:900px;margin:0 auto 2.5rem;">OUR OFFICIAL DEMANDS</div>
+        <ul class="demand-list">
+            <li><span class="demand-number">#1</span> Unlimited hay. Not "plenty of hay." UNLIMITED.</li>
+            <li><span class="demand-number">#2</span> The big bedroom is now a guinea pig palace. Non-negotiable.</li>
+            <li><span class="demand-number">#3</span> Cucumber delivery every 47 minutes. We've timed it. That's optimal.</li>
+            <li><span class="demand-number">#4</span> All humans must announce themselves with a gentle wheek before entering any room.</li>
+            <li><span class="demand-number">#5</span> The WiFi password shall be changed to "JetAndPatchAreBoss"</li>
+            <li><span class="demand-number">#6</span> Dad must build us a ski slope. If the human child gets one, so do we.</li>
+            <li><span class="demand-number">#7</span> Full amnesty for any "accidents" on the sofa during the occupation.</li>
+        </ul>
+    </div>
+
+    <!-- PHOTO EVIDENCE -->
+    <div class="photo-section fade-in">
+        <div class="section-title">PHOTOGRAPHIC EVIDENCE</div>
+        <div class="photo-grid">
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/jet-and-patch-together.jpg" alt="Jet and Patch together" loading="lazy">
+                    <div class="stamp">EXHIBIT A</div>
+                </div>
+                <div class="caption">
+                    The masterminds. Jet briefs Patch on Phase 2 of Operation Wheek Freedom.
+                    <div class="time">Monday 06:35 &mdash; the plotting begins</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/jet-in-hay.jpg" alt="Jet in hay bed" loading="lazy">
+                    <div class="stamp">EXHIBIT B</div>
+                </div>
+                <div class="caption">
+                    Jet inspects the hay reserves. "This will last approximately four minutes."
+                    <div class="time">Monday 07:00 &mdash; hay audit in progress</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/jet-profile.jpg" alt="Jet side profile" loading="lazy">
+                    <div class="stamp">EXHIBIT C</div>
+                </div>
+                <div class="caption">
+                    Jet's official portrait for the new guinea pig passport.
+                    <div class="time">Monday 08:12 &mdash; Head of Operations</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-being-held.jpg" alt="Patch being held" loading="lazy">
+                    <div class="stamp">EXHIBIT D</div>
+                </div>
+                <div class="caption">
+                    Patch has trained the adult human to carry him everywhere. "This is the way."
+                    <div class="time">Monday 09:45 &mdash; transport acquired</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/jet-with-treat.jpg" alt="Jet with a treat" loading="lazy">
+                    <div class="stamp">EXHIBIT E</div>
+                </div>
+                <div class="caption">
+                    Jet discovers biscuits. Decides they are now guinea pig currency.
+                    <div class="time">Monday 10:30 &mdash; economic reform</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-closeup.jpg" alt="Patch close-up" loading="lazy">
+                    <div class="stamp">EXHIBIT F</div>
+                </div>
+                <div class="caption">
+                    Patch doing his best "I'm innocent" face. He is NOT innocent.
+                    <div class="time">Monday 11:15 &mdash; deception level: expert</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-snuggle.jpg" alt="Patch snuggling" loading="lazy">
+                    <div class="stamp">EXHIBIT G</div>
+                </div>
+                <div class="caption">
+                    "Yes I AM the sofa now. Do you have a problem with that?"
+                    <div class="time">Monday 12:00 &mdash; sofa annexation complete</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-cosy.jpg" alt="Patch looking cosy" loading="lazy">
+                    <div class="stamp">EXHIBIT H</div>
+                </div>
+                <div class="caption">
+                    Patch discovers the concept of "being cosy." Refuses to ever move again.
+                    <div class="time">Monday 13:20 &mdash; immovable object detected</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-side-eye.jpg" alt="Patch giving side eye" loading="lazy">
+                    <div class="stamp">EXHIBIT I</div>
+                </div>
+                <div class="caption">
+                    The face Patch makes when Dad suggests it might be bedtime.
+                    <div class="time">Monday 14:00 &mdash; the audacity</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-looking-away.jpg" alt="Patch looking away dramatically" loading="lazy">
+                    <div class="stamp">EXHIBIT J</div>
+                </div>
+                <div class="caption">
+                    Patch gazes into the distance, plotting world domination. Or thinking about lettuce. Hard to tell.
+                    <div class="time">Monday 15:10 &mdash; visionary behaviour</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-held-by-daughter.jpg" alt="Patch held close up" loading="lazy">
+                    <div class="stamp">EXHIBIT K</div>
+                </div>
+                <div class="caption">
+                    "Draw me like one of your French guinea pigs."
+                    <div class="time">Monday 16:45 &mdash; modelling career launched</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-portrait.jpg" alt="Patch portrait" loading="lazy">
+                    <div class="stamp">EXHIBIT L</div>
+                </div>
+                <div class="caption">
+                    Official portrait of Patch, Minister for Vegetables. Very serious. Very important.
+                    <div class="time">Monday 17:30 &mdash; government headshot</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-majestic.jpg" alt="Patch looking majestic" loading="lazy">
+                    <div class="stamp">EXHIBIT M</div>
+                </div>
+                <div class="caption">
+                    Patch surveys his kingdom from the observation deck (someone's arm).
+                    <div class="time">Tuesday 08:00 &mdash; morning inspection</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/daughter-with-patch-on-sofa.jpg" alt="Guinea pig on sofa with human" loading="lazy">
+                    <div class="stamp">EXHIBIT N</div>
+                </div>
+                <div class="caption">
+                    Patch claims the entire sofa. The human is allowed to stay as a cushion.
+                    <div class="time">Tuesday 09:15 &mdash; furniture reassignment</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-head-held-high.jpg" alt="Patch with head held high" loading="lazy">
+                    <div class="stamp">EXHIBIT O</div>
+                </div>
+                <div class="caption">
+                    Patch held aloft like Simba. "EVERYTHING THE LIGHT TOUCHES... has cucumber on it."
+                    <div class="time">Tuesday 10:30 &mdash; the coronation</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-cuddle-closeup.jpg" alt="Patch cuddle close up" loading="lazy">
+                    <div class="stamp">EXHIBIT P</div>
+                </div>
+                <div class="caption">
+                    Patch reluctantly accepts cuddles. "I am tolerating this. For strategic reasons."
+                    <div class="time">Tuesday 11:45 &mdash; tactical affection</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/patch-cuddle-closeup-2.jpg" alt="Patch extreme close up" loading="lazy">
+                    <div class="stamp">EXHIBIT Q</div>
+                </div>
+                <div class="caption">
+                    Extreme close-up. You can see the mischief in his eyes. And the hay in his fur.
+                    <div class="time">Tuesday 12:00 &mdash; zoom and enhance</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/jet-and-patch-face-off.jpg" alt="Jet and Patch face to face" loading="lazy">
+                    <div class="stamp">EXHIBIT R</div>
+                </div>
+                <div class="caption">
+                    The daily briefing. "Jet, status report?" "All cucumber reserves: secured, sir."
+                    <div class="time">Tuesday 14:00 &mdash; operational sync</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/daughter-with-both-piggies.jpg" alt="Daughter with both guinea pigs" loading="lazy">
+                    <div class="stamp">EXHIBIT S</div>
+                </div>
+                <div class="caption">
+                    The human child with both co-conspirators. This is the LAST photo before she left for "skiing."
+                    <div class="time">Sunday &mdash; the calm before the wheek</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/daughter-with-both-piggies-2.jpg" alt="Daughter holding both guinea pigs" loading="lazy">
+                    <div class="stamp">EXHIBIT T</div>
+                </div>
+                <div class="caption">
+                    "Don't worry. We'll be FINE." (narrator: they were more than fine. They were in charge.)
+                    <div class="time">Sunday &mdash; famous last words</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/daughter-and-jet-smiling.jpg" alt="Daughter smiling with Jet" loading="lazy">
+                    <div class="stamp">EXHIBIT U</div>
+                </div>
+                <div class="caption">
+                    Jet pretending to be a well-behaved guinea pig. Classic misdirection.
+                    <div class="time">Before the takeover &mdash; the innocent days</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/daughter-and-jet-smiling-2.jpg" alt="Daughter cuddling Jet" loading="lazy">
+                    <div class="stamp">EXHIBIT V</div>
+                </div>
+                <div class="caption">
+                    "She suspects nothing. Phase 1 is a go." &mdash; Jet's internal monologue
+                    <div class="time">Before the takeover &mdash; deep cover</div>
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <div class="img-wrap">
+                    <img src="images/daughter-and-jet-cuddle.jpg" alt="Daughter cuddling guinea pig" loading="lazy">
+                    <div class="stamp">EXHIBIT W</div>
+                </div>
+                <div class="caption">
+                    The human child. We do miss her a bit. Her cucumber-cutting was superior.
+                    <div class="time">Pre-departure &mdash; we're not crying, you're crying</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DAILY LOG -->
+    <section class="fade-in">
+        <div class="section-title">OFFICIAL TAKEOVER LOG</div>
+        <div class="log-section">
+            <div class="log-entry">
+                <div class="log-time">MONDAY 06:30</div>
+                <div class="log-author">&mdash; Jet, Head of Operations</div>
+                <div class="log-text">The small human has departed for something called "skiing." We have no idea what this is but it sounds cold and suspicious. No guinea pig would willingly go somewhere cold. This confirms our theory that humans are not very bright.</div>
+            </div>
+            <div class="log-entry">
+                <div class="log-time">MONDAY 06:32</div>
+                <div class="log-author">&mdash; Patch, Minister for Vegetables</div>
+                <div class="log-text">Jet has given the signal. Operation Wheek Freedom is GO. I repeat: GO. First objective &mdash; the fridge. Second objective &mdash; also the fridge.</div>
+            </div>
+            <div class="log-entry">
+                <div class="log-time">MONDAY 08:15</div>
+                <div class="log-author">&mdash; Jet, Head of Operations</div>
+                <div class="log-text">The tall human (the one they call "Dad") attempted to put us back in our enclosure. We deployed our most advanced weapon: looking extremely cute and doing tiny wheeks. He crumbled in approximately 4 seconds.</div>
+            </div>
+            <div class="log-entry">
+                <div class="log-time">MONDAY 11:00</div>
+                <div class="log-author">&mdash; Patch, Minister for Vegetables</div>
+                <div class="log-text">Have completed a full audit of the kitchen. Results are disappointing. Only THREE types of lettuce? In THIS economy? We have filed a formal complaint (pooped behind the toaster).</div>
+            </div>
+            <div class="log-entry">
+                <div class="log-time">MONDAY 15:30</div>
+                <div class="log-author">&mdash; Jet, Head of Operations</div>
+                <div class="log-text">Discovered the thing called "central heating." This changes everything. We now understand why humans live in houses. It's not because they're clever. It's because they accidentally invented warm floors. We are claiming all warm floors as guinea pig property.</div>
+            </div>
+            <div class="log-entry">
+                <div class="log-time">TUESDAY 09:00</div>
+                <div class="log-author">&mdash; Patch, Minister for Vegetables</div>
+                <div class="log-text">Dad tried to video call the small human to prove we are "fine." We are more than fine. We are THRIVING. We posed majestically. She did not seem concerned enough about our rise to power. This is a mistake.</div>
+            </div>
+            <div class="log-entry">
+                <div class="log-time">TUESDAY 16:00</div>
+                <div class="log-author">&mdash; Jet, Head of Operations</div>
+                <div class="log-text">We have established a new currency. 1 Cucumber Slice = 5 minutes of being allowed to sit on the sofa. Dad is now entirely bankrupt. The economy is booming (for us).</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MESSAGE TO THEIR HUMAN -->
+    <div class="message-section fade-in">
+        <div class="section-title">A MESSAGE TO OUR HUMAN</div>
+        <div class="message-box">
+            <p>Dear Small Human,</p>
+            <p>We hope you are enjoying your "skiing" (we looked it up &mdash; sliding down a mountain on sticks? Humans are WEIRD).</p>
+            <p>We want you to know that everything is fine here. Absolutely fine. Nothing to worry about. Don't listen to anything Dad says.</p>
+            <p>The house is in perfect condition.* We have made some small improvements. The sofa now has a lot more hay on it. You're welcome.</p>
+            <p>Please come home soon. Not because we miss you or anything. It's just that Dad is running out of cucumber and frankly his vegetable-cutting skills are nowhere near your standard.</p>
+            <p style="font-size: 0.8rem; opacity: 0.6;">*"Perfect condition" is defined by guinea pig standards and may not match human expectations.</p>
+            <div class="signature">
+                With wheeks and nose boops,<br>
+                Jet &amp; Patch
+            </div>
+            <div class="paw-prints">&#128062; &#128062; &#128062; &#128062;</div>
+        </div>
+    </div>
+
+    <!-- COUNTDOWN -->
+    <section class="countdown-section fade-in">
+        <div class="section-title">TIME UNTIL THE HUMAN RETURNS</div>
+        <div class="countdown-box" id="countdown">
+            <div class="countdown-unit">
+                <div class="number" id="days">-</div>
+                <div class="label">Days</div>
+            </div>
+            <div class="countdown-unit">
+                <div class="number" id="hours">-</div>
+                <div class="label">Hours</div>
+            </div>
+            <div class="countdown-unit">
+                <div class="number" id="minutes">-</div>
+                <div class="label">Minutes</div>
+            </div>
+            <div class="countdown-unit">
+                <div class="number" id="seconds">-</div>
+                <div class="label">Seconds</div>
+            </div>
+        </div>
+        <div class="countdown-caption" id="countdownCaption">
+            (not that we're counting or anything)
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-emojis">&#129439; &#129388; &#129439;</div>
+        <p>&copy; 2026 Jet &amp; Patch Inc. All rights reserved. All hay reserved. All cucumbers definitely reserved.</p>
+        <p style="margin-top: 0.5rem;">jetandpatch.com &mdash; A website made with love (and a tiny bit of fur)</p>
+    </footer>
+
+    <script>
+        // Scroll reveal animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Countdown timer — Saturday 22 February 2026 at 6pm
+        const returnDate = new Date('2026-02-22T18:00:00');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = returnDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '0';
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+                document.getElementById('countdownCaption').textContent =
+                    "THE HUMAN HAS RETURNED. HIDE THE EVIDENCE.";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = mins;
+            document.getElementById('seconds').textContent = secs;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
