@@ -211,7 +211,7 @@
         }
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
             gap: 1.5rem;
         }
         .photo-card {
@@ -228,9 +228,18 @@
         .photo-card:nth-child(even):hover {
             transform: translateY(-6px) rotate(1deg);
         }
-        .photo-card img {
+        .photo-card .img-wrap {
+            position: relative;
+            overflow: hidden;
             width: 100%;
-            aspect-ratio: 4/3;
+            padding-bottom: 75%; /* 4:3 fallback */
+        }
+        .photo-card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             display: block;
         }
@@ -246,10 +255,7 @@
             font-size: 0.8rem;
             transform: rotate(3deg);
             letter-spacing: 1px;
-        }
-        .photo-card .img-wrap {
-            position: relative;
-            overflow: hidden;
+            z-index: 2;
         }
         .photo-card .caption {
             padding: 1rem 1.2rem;
@@ -543,7 +549,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/jet-and-patch-together.jpg" alt="Jet and Patch together" loading="lazy">
+                    <img src="images/jet-and-patch-together.jpg" alt="Jet and Patch together">
                     <div class="stamp">EXHIBIT A</div>
                 </div>
                 <div class="caption">
@@ -554,7 +560,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/jet-in-hay.jpg" alt="Jet in hay bed" loading="lazy">
+                    <img src="images/jet-in-hay.jpg" alt="Jet in hay bed">
                     <div class="stamp">EXHIBIT B</div>
                 </div>
                 <div class="caption">
@@ -565,7 +571,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/jet-profile.jpg" alt="Jet side profile" loading="lazy">
+                    <img src="images/jet-profile.jpg" alt="Jet side profile">
                     <div class="stamp">EXHIBIT C</div>
                 </div>
                 <div class="caption">
@@ -576,7 +582,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-being-held.jpg" alt="Patch being held" loading="lazy">
+                    <img src="images/patch-being-held.jpg" alt="Patch being held">
                     <div class="stamp">EXHIBIT D</div>
                 </div>
                 <div class="caption">
@@ -587,7 +593,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/jet-with-treat.jpg" alt="Jet with a treat" loading="lazy">
+                    <img src="images/jet-with-treat.jpg" alt="Jet with a treat">
                     <div class="stamp">EXHIBIT E</div>
                 </div>
                 <div class="caption">
@@ -598,7 +604,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-closeup.jpg" alt="Patch close-up" loading="lazy">
+                    <img src="images/patch-closeup.jpg" alt="Patch close-up">
                     <div class="stamp">EXHIBIT F</div>
                 </div>
                 <div class="caption">
@@ -609,7 +615,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-snuggle.jpg" alt="Patch snuggling" loading="lazy">
+                    <img src="images/patch-snuggle.jpg" alt="Patch snuggling">
                     <div class="stamp">EXHIBIT G</div>
                 </div>
                 <div class="caption">
@@ -620,7 +626,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-cosy.jpg" alt="Patch looking cosy" loading="lazy">
+                    <img src="images/patch-cosy.jpg" alt="Patch looking cosy">
                     <div class="stamp">EXHIBIT H</div>
                 </div>
                 <div class="caption">
@@ -631,7 +637,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-side-eye.jpg" alt="Patch giving side eye" loading="lazy">
+                    <img src="images/patch-side-eye.jpg" alt="Patch giving side eye">
                     <div class="stamp">EXHIBIT I</div>
                 </div>
                 <div class="caption">
@@ -642,7 +648,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-looking-away.jpg" alt="Patch looking away dramatically" loading="lazy">
+                    <img src="images/patch-looking-away.jpg" alt="Patch looking away dramatically">
                     <div class="stamp">EXHIBIT J</div>
                 </div>
                 <div class="caption">
@@ -653,7 +659,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-held-by-daughter.jpg" alt="Patch held close up" loading="lazy">
+                    <img src="images/patch-held-by-daughter.jpg" alt="Patch held close up">
                     <div class="stamp">EXHIBIT K</div>
                 </div>
                 <div class="caption">
@@ -664,7 +670,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-portrait.jpg" alt="Patch portrait" loading="lazy">
+                    <img src="images/patch-portrait.jpg" alt="Patch portrait">
                     <div class="stamp">EXHIBIT L</div>
                 </div>
                 <div class="caption">
@@ -675,7 +681,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-majestic.jpg" alt="Patch looking majestic" loading="lazy">
+                    <img src="images/patch-majestic.jpg" alt="Patch looking majestic">
                     <div class="stamp">EXHIBIT M</div>
                 </div>
                 <div class="caption">
@@ -686,7 +692,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/daughter-with-patch-on-sofa.jpg" alt="Guinea pig on sofa with human" loading="lazy">
+                    <img src="images/daughter-with-patch-on-sofa.jpg" alt="Guinea pig on sofa with human">
                     <div class="stamp">EXHIBIT N</div>
                 </div>
                 <div class="caption">
@@ -697,7 +703,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-head-held-high.jpg" alt="Patch with head held high" loading="lazy">
+                    <img src="images/patch-head-held-high.jpg" alt="Patch with head held high">
                     <div class="stamp">EXHIBIT O</div>
                 </div>
                 <div class="caption">
@@ -708,7 +714,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-cuddle-closeup.jpg" alt="Patch cuddle close up" loading="lazy">
+                    <img src="images/patch-cuddle-closeup.jpg" alt="Patch cuddle close up">
                     <div class="stamp">EXHIBIT P</div>
                 </div>
                 <div class="caption">
@@ -719,7 +725,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/patch-cuddle-closeup-2.jpg" alt="Patch extreme close up" loading="lazy">
+                    <img src="images/patch-cuddle-closeup-2.jpg" alt="Patch extreme close up">
                     <div class="stamp">EXHIBIT Q</div>
                 </div>
                 <div class="caption">
@@ -730,7 +736,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/jet-and-patch-face-off.jpg" alt="Jet and Patch face to face" loading="lazy">
+                    <img src="images/jet-and-patch-face-off.jpg" alt="Jet and Patch face to face">
                     <div class="stamp">EXHIBIT R</div>
                 </div>
                 <div class="caption">
@@ -741,7 +747,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/daughter-with-both-piggies.jpg" alt="Daughter with both guinea pigs" loading="lazy">
+                    <img src="images/daughter-with-both-piggies.jpg" alt="Daughter with both guinea pigs">
                     <div class="stamp">EXHIBIT S</div>
                 </div>
                 <div class="caption">
@@ -752,7 +758,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/daughter-with-both-piggies-2.jpg" alt="Daughter holding both guinea pigs" loading="lazy">
+                    <img src="images/daughter-with-both-piggies-2.jpg" alt="Daughter holding both guinea pigs">
                     <div class="stamp">EXHIBIT T</div>
                 </div>
                 <div class="caption">
@@ -763,7 +769,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/daughter-and-jet-smiling.jpg" alt="Daughter smiling with Jet" loading="lazy">
+                    <img src="images/daughter-and-jet-smiling.jpg" alt="Daughter smiling with Jet">
                     <div class="stamp">EXHIBIT U</div>
                 </div>
                 <div class="caption">
@@ -774,7 +780,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/daughter-and-jet-smiling-2.jpg" alt="Daughter cuddling Jet" loading="lazy">
+                    <img src="images/daughter-and-jet-smiling-2.jpg" alt="Daughter cuddling Jet">
                     <div class="stamp">EXHIBIT V</div>
                 </div>
                 <div class="caption">
@@ -785,7 +791,7 @@
 
             <div class="photo-card">
                 <div class="img-wrap">
-                    <img src="images/daughter-and-jet-cuddle.jpg" alt="Daughter cuddling guinea pig" loading="lazy">
+                    <img src="images/daughter-and-jet-cuddle.jpg" alt="Daughter cuddling guinea pig">
                     <div class="stamp">EXHIBIT W</div>
                 </div>
                 <div class="caption">
